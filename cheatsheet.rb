@@ -23,7 +23,8 @@ require "pry"
 require "thin"
 
 # GET Routes
-get '/' do 
+
+get '/' do
 	erb :index
 end
 
