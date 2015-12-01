@@ -1,0 +1,13 @@
+<h1>Command Line</h1>
+<a href="/" style="margin-right:5px; text-decoration: none; color: #66ffcc">Home</a>
+<a href="/search" style="margin-right:5px; text-decoration: none; color: #66ffcc">Search</a>
+<hr />
+<ul>
+	<% @command.each do |cm| %>
+	<li>
+		<a href= <%="/command_result/#{cm}"%> style="margin-right:5px; text-decoration: none; color: #9900ff" >
+			<%= cm %>
+		</a>
+	</li>
+	<% end %>
+</ul>

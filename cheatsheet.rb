@@ -22,6 +22,25 @@ require "sinatra"
 require "pry"
 require "thin"
 
+
+def command_type (command)
+	@command = command.downcase
+	case @command
+	when 'cp'
+		@description = `man cp`
+	when 'ls'
+		@description = `man ls`
+	when 'mkdir'
+		@description = `man mkdir`
+	when 'touch'
+		@description = `man touch`
+	when 'mv'
+		@description = `man mv`
+	else
+		@description = `man #{params[:command_name]}`
+	end	
+end
+
 # GET Routes
 
 get '/' do
@@ -34,28 +53,27 @@ get '/command_line' do
 end
 
 get '/command_result/:command' do
-	binding.pry
-	erb :sublime_text
-	@command = params[:command]
-	case @command
-	when 'cp'
-		puts `man cp`
-	when 'ls'
-		puts `man ls`
-	when 'mkdir'
-		puts `man mkdir`
-	when 'touch'
-		puts `man touch`
-	when 'mv'
-		puts `man mv`
-	end
+	command_type(params[:command])
+	erb :command_result
 end
 
 
 get '/search' do
-
+	erb :command_search
 end
 
-get '/google' do 
 
+#POST Routes
+post '/command_search' do
+	command_type(params[:command_name])
+	# @description = `man command_type(params[:command_name])`
+	erb :command_result
 end
+
+
+
+
+
+
+
+
