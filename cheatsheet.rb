@@ -29,13 +29,33 @@ get '/' do
 end
 
 get '/command_line' do
+	@command = ["cp", "ls", "mkdir", "touch", "mv"]
 	erb :command_line
 end
 
-get '/sublime_text' do
+get '/command_result/:command' do
+	binding.pry
 	erb :sublime_text
+	@command = params[:command]
+	case @command
+	when 'cp'
+		puts `man cp`
+	when 'ls'
+		puts `man ls`
+	when 'mkdir'
+		puts `man mkdir`
+	when 'touch'
+		puts `man touch`
+	when 'mv'
+		puts `man mv`
+	end
 end
 
+
 get '/search' do
+
+end
+
+get '/google' do 
 
 end
